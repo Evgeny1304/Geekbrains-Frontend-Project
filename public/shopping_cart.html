@@ -74,10 +74,11 @@
                         <button type="button" class="nav-right__img" @click="isVisibleCart = !isVisibleCart">
                             <img src="img/cart.svg" alt="cart">
                         </button>
+                        <div v-if="cart.length" class="cart-items-quantity">{{totalQuantity}}</div>
                         <cart :cart="cart" v-if="isVisibleCart" @ondelete="handleDeleteClick"></cart>
                     </div>
                     <button type="button" class="nav-right__btn button">
-                        My Account
+                        {{getUser}}
                         <i class="fas fa-caret-down"></i>
                     </button>
                 </div>
@@ -412,15 +413,7 @@
     </section>
     <section class="cart-content">
         <div class="container">
-            <bigcart :bigcart="bigCart" @ondelete="handleDeleteClick"></bigcart>
-            <div class="cart-buttons d-flex space-btw">
-                <button class="cart-btn button" type="button">
-                    CLEAR SHOPPING CART
-                </button>
-                <button class="cart-btn button ml-auto" type="button">
-                    CONTINUE sHOPPING
-                </button>
-            </div>
+            <bigcart v-if="cart.length" :cart="cart" @ondelete="handleDeleteClick" @deleteall="handleDeleteCart"></bigcart>
             <div class="shipping d-flex space-btw">
                 <div class="shipping__item">
                     <h2 class="shipping__heading">
@@ -458,13 +451,13 @@
                         <p class="subtotal__text">
                             Sub total
                             <span>
-                            $900
+                            ${{totalSum}}
                         </span>
                         </p>
                         <h2 class="subtotal__heading">
                             GRAND TOTAL
                             <span class="pink">
-                            $900
+                            ${{totalSum}}
                         </span>
                         </h2>
                     </div>
