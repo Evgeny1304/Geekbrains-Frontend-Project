@@ -77,10 +77,11 @@
                         </button>
                         <cart :cart="cart" v-if="isVisibleCart" @ondelete="handleDeleteClick"></cart>
                     </div>
-                    <button type="button" class="nav-right__btn button">
+                    <button type="button" id="show-modal" @click="showModal = true" class="nav-right__btn button button-open">
                         {{getUser}}
                         <i class="fas fa-caret-down"></i>
                     </button>
+                    <modal :users="users" v-if="showModal" @close="showModal = false">
                 </div>
             </div>
         </div>
@@ -386,53 +387,23 @@
             </div>
         </div>
     </header>
-    <div class="modal">
-        <div class="container">
-            <!--<a href="#" class="button"-->
-              <!--&gt;My&nbsp;Account</a>-->
-            <!--<div class="buttons_account">-->
-                <!--<a href="#" class="button"></a>-->
-                <!--<div>-->
-                    <!--<li><a class="drop-link" href="#">Sign Out</a></li>-->
-                    <!--<li><a class="drop-link" href="#">Change&nbsp;password</a>-->
-                    <!--</li>-->
-                    <!--<div class="modal">-->
-                        <!--<div>-->
-                            <!--<a href="#"><i @click.prevent="handleChangePasswordClick"></i></a>-->
-                            <!--<main>-->
-                                <!--<a href="#"><h2>CHANGE PASSWORD</h2></a>-->
-                                <!--<input-->
-                                       <!--placeholder="Сurrent Password" type="password"-->
-                                       <!--required>-->
-                                <!--<input-->
-                                       <!--type="password" placeholder="New Password" required>-->
-                                <!--<div class="modal-button">-->
-                                    <!--<a href="#"-->
-                                       <!--&gt;SAVE PASSWORD</a>-->
-                                    <!--<p ></p>-->
-                                <!--</div>-->
-
-                            <!--</main>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<li><a class="drop-link" href="#">Orders</a></li>-->
-                <!--</div>-->
-            <!--</div>-->
-            <form action="#" class="reg">
-                <input type="text" placeholder="login" v-model="login">
-                <input type="email" placeholder="e-mail">
-                <input type="password" placeholder="password" v-model="password">
-                <button type="submit" @click.prevent="handleSignUp">Sign Up</button>
-                <button type="submit" @click.prevent="handleSignIn">Sign In</button>
-                <button type="submit" @click.prevent="handleLogOut">Log out</button>
-            </form>
-            <form action="#" class="change">
-                <input type="password" placeholder="current password" v-model="password">
-                <input type="password" placeholder="new password" v-model="changePassword">
-                <button type="submit" @click.prevent="handleChangePass">Change password</button>
-            </form>
-        </div>
-    </div>
+    <!--<div class="modal-test">-->
+        <!--<div class="container">-->
+            <!--<form action="#" class="reg">-->
+                <!--<input type="text" placeholder="login" v-model="login">-->
+                <!--<input type="email" placeholder="e-mail">-->
+                <!--<input type="password" placeholder="password" v-model="password">-->
+                <!--<button type="submit" @click.prevent="handleSignUp">Sign Up</button>-->
+                <!--<button type="submit" @click.prevent="handleSignIn">Sign In</button>-->
+                <!--<button type="submit" @click.prevent="handleLogOut">Log out</button>-->
+            <!--</form>-->
+            <!--<form action="#" class="change">-->
+                <!--<input type="password" placeholder="current password" v-model="password">-->
+                <!--<input type="password" placeholder="new password" v-model="changePassword">-->
+                <!--<button type="submit" @click.prevent="handleChangePass">Change password</button>-->
+            <!--</form>-->
+        <!--</div>-->
+    <!--</div>-->
     <!--Section Breadcrumbs-->
     <section class="breadcrumbs" id="breadcrumbs">
         <div class="container">
@@ -698,18 +669,26 @@
             </div>
         </div>
     </section>
-    <section class="feedback">
+    <section class="feedback" id="feedback">
         <div class="container">
-            <div class="feedback_new">
-                    <h2>Send Us Your Feedback</h2>
-                    <input
-                           placeholder="Name" v-model="name" type="text" required>
-                    <input
-                           placeholder="Example@gmail.com" v-model="mail" type="email" required>
-                    <textarea placeholder="You message" v-model="comment"></textarea>
-                        <button type="button" @click.prevent="handleAddFeedback">Submit</button>
-            </div>
+            <h2>Send Us Your Feedback</h2>
+            <form class="feedback-new">
+                <label>
+                    <input placeholder="Name" v-model="name" type="text" required class="feedback-input">
+                </label>
+                <label>
+                    <input placeholder="Your e-mail" v-model="mail" type="email" required class="feedback-input">
+                </label>
+                <textarea placeholder="Your message" v-model="comment"></textarea>
+                <button type="submit" @click.prevent="handleAddFeedback" class="button cart-btn">
+                    Submit
+                </button>
+            </form>
             <feedback-list :feedback="feedback" @approve="handleApproveFeedback" @delete="handleDeleteFeedback"></feedback-list>
+        </div>
+    </section>
+    <section class="reviews">
+        <div class="container">
             <feedback-approved :approved="approved"></feedback-approved>
         </div>
     </section>

@@ -154,14 +154,22 @@ Vue.component('feedback-list', {
     },
     template: `
         <div class="comments">
-        <ul class="d-flex">
-        <li v-for="item in feedback">
-        <h3>{{item.name}}</h3>
-        <p>{{item.comment}}</p>
-        <button @click.prevent="handleApproveFeedback(item)">Approve</button>
-        <button @click.prevent="handleDeleteFeedback(item)">Delete</button>
-</li>
-</ul>
+         <ul class="d-flex">
+            <li v-for="item in feedback">
+                <h3 class="comments-name">
+                    {{item.name}}
+                </h3>
+                <p class="comments-text">
+                    {{item.comment}}
+                </p>
+                 <button @click.prevent="handleApproveFeedback(item)" class="button cart-btn comments-btn">
+                    Approve
+                 </button>
+                 <button @click.prevent="handleDeleteFeedback(item)" class="button cart-btn comments-btn">
+                    Delete
+                 </button>
+            </li>
+          </ul>
         </div>
     `,
 });
@@ -170,16 +178,131 @@ Vue.component('feedback-approved', {
     props: ['approved'],
     template: `
         <div class="comments">
-        <ul class="d-flex">
-        <li v-for="item in approved">
-        <h3>{{item.name}}</h3>
-        <p>{{item.mail}}</p>
-        <p>{{item.comment}}</p>
-</li>
-</ul>
+            <h2>
+                Consumer's reviews
+            </h2>
+            <ul class="d-flex">
+                <li v-for="item in approved">
+                    <h3 class="comments-name">
+                        {{item.name}}
+                    </h3>
+                    <p class="comments-email">
+                        {{item.mail}}
+                    </p>
+                    <p class="comments-text">
+                        {{item.comment}}
+                    </p>
+                </li>
+             </ul>
         </div>
     `,
 });
+
+Vue.component('modal', {
+    props: ['users'],
+    data() {
+        return {
+            name: '',
+            login: '',
+            password: '',
+            mail: '',
+        }
+    },
+    methods: {
+        handleSignUp() {
+            fetch(`${API_URL}/users`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    login: this.login,
+                    password: this.password,
+                    name: this.name,
+                    mail: this.mail,
+                })
+            })
+                .then((response) => response.json())
+                .then((item) => {
+                    this.users.push(item);
+                });
+        },
+        handleSignIn(){
+            const userReg = this.users.find((user) => user.login === this.login && user.password === this.password);
+            if (userReg === undefined){
+                localStorage.clear();
+                console.log('Error');
+            }else {
+                localStorage.setItem('user', userReg.login);
+                localStorage.setItem('userId', userReg.id);
+            }
+            window.location.reload();
+        },
+    },
+    template: `
+           <transition name="modal">
+        <div class="modal-mask">
+            <div class="modal-wrapper">
+                <div class="modal-container">
+                    <div v-if="localStorage.getItem('user') === null" class="tabs">
+                        <input type="radio" name="tab" id="sign-in" class="tab-input" checked>
+                        <label for="sign-in" class="tab">Sign-in</label>
+                        <input type="radio" name="tab" class="tab-input" id="sign-up" >
+                        <label for="sign-up" class="tab">Sign-up</label>
+                        <div class="content">
+                            <button class="modal-button button-close" type="button" @click="$emit('close')">
+                            <i class="far fa-times-circle"></i>
+                            </button>
+                            <div class="sign-in">
+                                <h3>
+                                    Already Register? Login Now!
+                                </h3>
+                                <form action="#" class="reg">
+                                    <label>
+                                        <input type="text" name="login" placeholder="Enter Your Login" class="reg__input" v-model="login">
+                                    </label>
+                                    <label>
+                                        <input type="password" name="password" placeholder="Enter Your Password" class="reg__input" v-model="password">
+                                    </label>
+                                    <button type="submit" class="button cart-btn" @click.prevent="handleSignIn()">
+                                        Login
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="sign-up">
+                                <h3>
+                                    Register Now!
+                                </h3>
+                                <form action="#" class="reg">
+                                    <label>
+                                        <input type="text" name="name" placeholder="Enter Your Name" class="reg__input" v-model="name">
+                                    </label>
+                                    <label>
+                                        <input type="text" name="login" placeholder="Enter Your Login" class="reg__input" v-model="login">
+                                    </label>
+                                    <label>
+                                        <input type="email" name="email" placeholder="Enter Your Email" class="reg__input" v-model="mail">
+                                    </label>
+                                    <label>
+                                        <input type="password" name="password" placeholder="Enter Your Password" class="reg__input" v-model="password">
+                                    </label>
+                                    <button class="button cart-btn" type="submit" @click.prevent="handleSignUp()">
+                                        Register
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else>
+                    Hello
+</div>
+                </div>
+            </div>
+        </div>
+    </transition>    
+    `
+});
+
 
 const app = new Vue({
     el: "#app",
@@ -199,6 +322,7 @@ const app = new Vue({
         changePassword: '',
         comment: '',
         isVisibleCart: false,
+        showModal: false,
     },
     mounted() {
         fetch(`${API_URL}/cart`)
@@ -350,33 +474,6 @@ const app = new Vue({
                 .then(() => {
                     this.feedback = this.feedback.filter((comment) => comment.id !== item.id);
                 });
-        },
-        handleSignUp(item) {
-            fetch(`${API_URL}/users`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    login: this.login,
-                    password: this.password
-                })
-            })
-                .then((response) => response.json())
-                .then((item) => {
-                    this.users.push(item);
-                });
-        },
-        handleSignIn(){
-            const userReg = this.users.find((user) => user.login === this.login && user.password === this.password);
-            if (userReg === undefined){
-                localStorage.clear();
-                console.log('Error');
-            }else {
-                localStorage.setItem('user', userReg.login);
-                localStorage.setItem('userId', userReg.id);
-            }
-            window.location.reload();
         },
         handleLogOut(){
             localStorage.removeItem('user');

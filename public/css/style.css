@@ -8,6 +8,9 @@ body {
   color: #222222;
   font-weight: 400; }
 
+img {
+  max-width: 100%; }
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   letter-spacing: 0.025em; }
@@ -48,7 +51,7 @@ ul, ol {
   display: -o-flex;
   display: flex; }
 
-.align-i-с {
+.align-i-╤Б {
   align-items: center; }
 
 .space-btw {
@@ -130,6 +133,7 @@ ul, ol {
   margin-right: 26px; }
 
 .nav-right__btn {
+  position: relative;
   padding: 10px 0;
   width: 130px;
   background-color: #f16d7f;
@@ -141,6 +145,16 @@ ul, ol {
     background-color: #fff;
     border: 1px solid #f16d7f;
     color: #f16d7f; }
+
+.cart-items-quantity {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background-color: #f16d7f;
+  border-radius: 50px;
+  color: #fff; }
 
 .navigation {
   border-top: 1px solid #ececec;
@@ -548,7 +562,7 @@ ul, ol {
   width: 212px;
   border: 1px solid transparent; }
   .featured-btn:after {
-    content: "→";
+    content: "тЖТ";
     margin-left: 8px; }
   .featured-btn:hover {
     border: 1px solid #f16d7f;
@@ -1095,10 +1109,6 @@ input[type="checkbox"]:checked ~ label::before {
   color: #656565;
   font-size: 13px; }
 
-.cart-quantity::-webkit-inner-spin-button,
-.cart-quantity::-webkit-outer-spin-button {
-  -webkit-appearance: none; }
-
 .cart-quantity::placeholder {
   color: #656565;
   font-size: 13px; }
@@ -1297,6 +1307,151 @@ input[type="email"], input[type="password"] {
 .info__field:after {
   content: "*";
   color: #ff0d0d; }
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(241, 109, 127, 0.2);
+  display: table;
+  transition: opacity 0.3s ease; }
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle; }
+
+.modal-container {
+  max-width: 425px;
+  margin: 0 auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease; }
+
+.modal-body {
+  margin: 20px 0; }
+
+.modal-enter {
+  opacity: 0; }
+
+.modal-leave-active {
+  opacity: 0; }
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1); }
+
+.tabs {
+  color: rgba(34, 34, 34, 0.9);
+  text-align: center;
+  font-weight: bold;
+  max-width: 425px;
+  width: 100%;
+  min-height: 525px;
+  background-color: #ffffff;
+  padding: 30px; }
+
+.tab {
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #222222;
+  margin-right: 10px;
+  display: inline-block;
+  padding: 10px 40px;
+  border: 1px solid #eeeeee; }
+  .tab-input:checked + label {
+    color: #f16d7f;
+    border: 1px solid #f16d7f; }
+
+input[id="sign-in"]:checked ~ .content .sign-in,
+input[id="sign-up"]:checked ~ .content .sign-up {
+  display: block; }
+
+.content {
+  margin-top: 25px;
+  position: relative; }
+
+.button-close {
+  position: absolute;
+  font-size: 18px;
+  cursor: pointer;
+  right: -40px;
+  top: -90px; }
+
+.sign-in,
+.sign-up {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  display: none; }
+
+.sign-in h3,
+.sign-up h3 {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-bottom: 30px; }
+
+.reg {
+  text-align: center; }
+  .reg__input {
+    margin-bottom: 20px;
+    border: 1px solid #eeeeee; }
+
+.feedback {
+  padding: 60px 0;
+  text-align: center; }
+  .feedback h2 {
+    text-transform: uppercase;
+    margin-bottom: 40px; }
+  .feedback-new {
+    max-width: 425px;
+    margin: 60px auto; }
+  .feedback-input, .feedback textarea {
+    border: 2px solid #eaeaea;
+    color: #4a4a4a;
+    font-size: 14px;
+    padding: 17px 18px;
+    width: 100%;
+    margin-bottom: 20px; }
+  .feedback textarea {
+    resize: none; }
+
+.comments {
+  margin: 0 -15px; }
+  .comments ul {
+    flex-wrap: wrap; }
+  .comments li {
+    width: calc(100% / 12 * 3 - 30px);
+    margin: 15px; }
+  .comments-name {
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    color: #f16d7f; }
+  .comments-text {
+    font-size: 15px;
+    margin-bottom: 15px; }
+  .comments-btn {
+    margin-bottom: 20px; }
+  .comments-email {
+    margin-bottom: 25px;
+    font-size: 16px; }
+
+.reviews {
+  padding: 60px 0;
+  text-align: center;
+  background-color: #eee; }
+  .reviews h2 {
+    text-transform: uppercase;
+    margin-bottom: 40px; }
 
 .drop-box-cart {
   width: 265px;
