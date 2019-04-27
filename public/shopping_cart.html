@@ -10,12 +10,13 @@
     <link rel="shortcut icon" href="//mysite.com/images/fav-logo-image.png" type="image/x-icon">
     <!-- OG Tags -->
     <meta property="og:title" content="Luxerious Fashion Brand">
-    <meta property="og:description" content= "Geekbrains">
+    <meta property="og:description" content="Geekbrains">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="https://mysite.com" >
+    <meta property="og:image" content="https://mysite.com">
     <meta property="og:site_name" content="">
     <!--Fonts-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,900" rel="stylesheet">
     <!-- CSS Styles -->
     <link rel="stylesheet" href="css/style.css">
@@ -47,22 +48,31 @@
                                 <ul class="drop__menu">
                                     <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
                                     <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a>
+                                    </li>
+                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a>
+                                    </li>
                                     <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a></li>
                                     <li class="drop__item"><a class="drop__link" href="catalog.html">Denim</a></li>
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Leggins/Pants</a></li>
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Skirts/Shorts</a></li>
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Accessories</a></li>
+                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Leggins/Pants</a>
+                                    </li>
+                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Skirts/Shorts</a>
+                                    </li>
+                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Accessories</a>
+                                    </li>
                                 </ul>
                                 <h6 class="drop__heading">Men</h6>
                                 <ul class="drop__menu">
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Tees/Tank tops</a></li>
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Shirts/Polos</a></li>
+                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Tees/Tank tops</a>
+                                    </li>
+                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Shirts/Polos</a>
+                                    </li>
                                     <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters</a></li>
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Hoodies</a></li>
+                                    <li class="drop__item"><a class="drop__link"
+                                                              href="catalog.html">Sweaters/Hoodies</a></li>
                                     <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a></li>
-                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Vests</a></li>
+                                    <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Vests</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -72,15 +82,17 @@
                 <div class="nav-right d-flex align-i-с">
                     <div class="nav-right__drop">
                         <button type="button" class="nav-right__img" @click="isVisibleCart = !isVisibleCart">
+                            <div v-if="cart.length" class="cart-items-quantity">{{totalQuantity}}</div>
                             <img src="img/cart.svg" alt="cart">
                         </button>
-                        <div v-if="cart.length" class="cart-items-quantity">{{totalQuantity}}</div>
                         <cart :cart="cart" v-if="isVisibleCart" @ondelete="handleDeleteClick"></cart>
                     </div>
-                    <button type="button" class="nav-right__btn button">
+                    <button type="button" id="show-modal" @click="showModal = true"
+                            class="nav-right__btn button button-open">
                         {{getUser}}
                         <i class="fas fa-caret-down"></i>
                     </button>
+                    <modal :users="users" v-if="showModal" @close="showModal = false">
                 </div>
             </div>
         </div>
@@ -101,39 +113,54 @@
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Denim</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Leggings/Pants</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Skirts/Shorts</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Accessories </a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Leggings/Pants</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Skirts/Shorts</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Accessories </a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <div class="drop__super-sale d-flex">
                                         <p class="drop__super-sale-text">Super sale!</p>
@@ -149,39 +176,54 @@
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Denim</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Leggings/Pants</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Skirts/Shorts</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Accessories </a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Leggings/Pants</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Skirts/Shorts</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Accessories </a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <div class="drop__super-sale d-flex">
                                         <p class="drop__super-sale-text">Super sale!</p>
@@ -197,39 +239,54 @@
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Denim</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Leggings/Pants</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Skirts/Shorts</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Accessories </a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Leggings/Pants</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Skirts/Shorts</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Accessories </a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <div class="drop__super-sale d-flex">
                                         <p class="drop__super-sale-text">Super sale!</p>
@@ -245,39 +302,54 @@
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Denim</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Leggings/Pants</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Skirts/Shorts</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Accessories </a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Leggings/Pants</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Skirts/Shorts</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Accessories </a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <div class="drop__super-sale d-flex">
                                         <p class="drop__super-sale-text">Super sale!</p>
@@ -293,39 +365,54 @@
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Denim</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Leggings/Pants</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Skirts/Shorts</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Accessories </a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Leggings/Pants</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Skirts/Shorts</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Accessories </a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <div class="drop__super-sale d-flex">
                                         <p class="drop__super-sale-text">Super sale!</p>
@@ -341,39 +428,54 @@
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Blazers</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Denim</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Leggings/Pants</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Skirts/Shorts</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Accessories </a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Leggings/Pants</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Skirts/Shorts</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Accessories </a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
                                     </ul>
                                 </div>
                                 <div class="drop__down">
                                     <h3 class="drop__heading">Women</h3>
                                     <ul class="drop__menu">
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a></li>
+                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Dresses</a>
+                                        </li>
                                         <li class="drop__item"><a class="drop__link" href="catalog.html">Tops</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Sweaters/Knits</a></li>
-                                        <li class="drop__item"><a class="drop__link" href="catalog.html">Jackets/Coats</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Sweaters/Knits</a></li>
+                                        <li class="drop__item"><a class="drop__link"
+                                                                  href="catalog.html">Jackets/Coats</a></li>
                                     </ul>
                                     <div class="drop__super-sale d-flex">
                                         <p class="drop__super-sale-text">Super sale!</p>
@@ -413,7 +515,8 @@
     </section>
     <section class="cart-content">
         <div class="container">
-            <bigcart v-if="cart.length" :cart="cart" @ondelete="handleDeleteClick" @deleteall="handleDeleteCart"></bigcart>
+            <bigcart v-if="cart.length" :cart="cart" @changecount="handleChangeCountClick" @ondelete="handleDeleteClick"
+                     @deleteall="handleDeleteCart"></bigcart>
             <div class="shipping d-flex space-btw">
                 <div class="shipping__item">
                     <h2 class="shipping__heading">
@@ -469,6 +572,30 @@
 
         </div>
     </section>
+    <section class="feedback" id="feedback">
+        <div class="container">
+            <h2>Send Us Your Feedback</h2>
+            <form class="feedback-new">
+                <label>
+                    <input placeholder="Name" v-model="name" type="text" required class="feedback-input">
+                </label>
+                <label>
+                    <input placeholder="Your e-mail" v-model="mail" type="email" required class="feedback-input">
+                </label>
+                <textarea placeholder="Your message" v-model="comment"></textarea>
+                <button type="submit" @click.prevent="handleAddFeedback" class="button cart-btn">
+                    Submit
+                </button>
+            </form>
+            <feedback-list :feedback="feedback" @approve="handleApproveFeedback"
+                           @delete="handleDeleteFeedback"></feedback-list>
+        </div>
+    </section>
+    <section class="reviews">
+        <div class="container">
+            <feedback-approved :approved="approved"></feedback-approved>
+        </div>
+    </section>
     <!--Section Quote-Subscribe-->
     <section class="quote-subscribe">
         <div class="container">
@@ -479,7 +606,8 @@
                     </div>
                     <div class="quote__desc">
                         <blockquote>
-                            “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus condimentum a. Aliquam condimentum mattis neque sed pretium”
+                            “Vestibulum quis porttitor dui! Quisque viverra nunc mi, a pulvinar purus condimentum a.
+                            Aliquam condimentum mattis neque sed pretium”
                         </blockquote>
                         <p class="quote__name">
                             Bin Burhan
@@ -523,10 +651,13 @@
                     </span>
                     </a>
                     <p class="footer-desc__text">
-                        Objectively transition extensive data rather than cross functional solutions. Monotonectally syndicate multidisciplinary materials before go forward benefits. Intrinsicly syndicate an expanded array of processes and cross-unit partnerships.
+                        Objectively transition extensive data rather than cross functional solutions. Monotonectally
+                        syndicate multidisciplinary materials before go forward benefits. Intrinsicly syndicate an
+                        expanded array of processes and cross-unit partnerships.
                     </p>
                     <p class="footer-desc__text">
-                        Efficiently plagiarize 24/365 action items and focused infomediaries. Distinctively seize superior initiatives for wireless technologies. Dynamically optimize.
+                        Efficiently plagiarize 24/365 action items and focused infomediaries. Distinctively seize
+                        superior initiatives for wireless technologies. Dynamically optimize.
                     </p>
                 </div>
                 <div class="footer-nav d-flex space-around">
