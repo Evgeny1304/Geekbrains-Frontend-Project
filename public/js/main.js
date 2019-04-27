@@ -325,8 +325,8 @@ Vue.component('modal', {
                                  <h3>Are You Sure?</h3>
                                  <label>
                                     <input type="password" name="password" placeholder="Enter New Password" class="reg__input" v-model="changePassword">
-                                    <button class="button cart-btn" type="submit" @click.prevent="handleChangePassword()">Change password</button>
                                  </label>
+                                 <button class="button cart-btn" type="submit" @click.prevent="handleChangePassword()">Change password</button>
                              </form>
                           <li>
                             <button v-if="showChangePassword === false" class="button cart-btn" type="button" @click.prevent="handleLogOut()">
