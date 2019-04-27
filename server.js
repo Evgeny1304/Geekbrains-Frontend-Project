@@ -54,6 +54,7 @@ app.post('/feedback_approve', (req, res) => {
         }
 
         const comment = JSON.parse(data);
+        req.body.id = comment.length + 1;
         comment.push(req.body);
 
         fs.writeFile('./db/feedback_approve.json', JSON.stringify(comment), (err) => {
