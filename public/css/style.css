@@ -1464,12 +1464,10 @@ input[id="sign-up"]:checked ~ .content .sign-up {
   background-color: #fff;
   box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.08);
   z-index: 10;
-  display: block;
-}
+  display: block; }
 
 .nav-right__btn {
-  position: relative;
-}
+  position: relative; }
 
 .cart-items-quantity {
   position: absolute;
@@ -1483,7 +1481,9 @@ input[id="sign-up"]:checked ~ .content .sign-up {
   text-align: center;
   line-height: 20px;
   font-weight: bold;
-  font-size: 12px;
-}
+  font-size: 12px; }
+
+.change-pass {
+  margin: 40px 0; }
 
 /*# sourceMappingURL=style.css.map */

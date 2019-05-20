@@ -6,6 +6,9 @@ Vue.component('bigcart', {
         },
         handleDeleteCart(){
             this.$emit('deleteall', this.cart);
+        },
+        handleChangeCountClick(item, quantity){
+            this.$emit("changecount", item, quantity);
         }
     },
     computed: {
@@ -79,7 +82,7 @@ Vue.component('bigcart', {
                 </div>
                 <div class="column-short">
                     <label>
-                        <input type="number" class="cart-quantity" v-model="item.quantity">
+                        <input type="number" min="1" class="cart-quantity" v-model="item.quantity" @click="handleChangeCountClick(item, item.quantity)">
                     </label>
                 </div>
                 <div class="column-short">
@@ -109,5 +112,4 @@ Vue.component('bigcart', {
             </div>
   `,
 });
-
 
